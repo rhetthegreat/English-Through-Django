@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet"href="{% static "css/simple-sidebar.css"%}"/>
-    <script src ="{% static "js/jquery.js"%}"/>
-    <script src ="{% static "js/base.js"%}"/>
-    <link rel="stylesheet" src= "{% static "css/base.css"%}"/>
+
+    <link rel="stylesheet"href="{% static "css/base.css"%}"/>
+    <link rel="stylesheet"href= "{% static "css/simple-sidebar.css"%}"/>
+    <script type="text/javascript" src="{% static "js/jquery.js"%}"/>
+
+    <link rel="stylesheet" type="text/css" href= "{% static "css/base.css"%}"/>
     {% block head %}
 
     {% endblock %}
@@ -14,51 +16,43 @@
 </script>
 
   </head>
-  <div class="container">
   <body>
-    <div id="sidebar-wrapper">
-        <ol class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    English
-                </a>
-            </li>
-            <li>
-                <a href="/">Home</a>
-
-            </li>
-            <li>
-
-                <a data-toggle="collapse" data-target=".sublist" >{{chapter.name}} - Chapter {{chapter.position}}</a>
-                <ul class="sublist">
-                {% for topic in chapter.topics.all %}
-                <li>
-                    <a data-toggle="collapse" data-target="#sublist{{topic.id}}" >{{ topic.name }}</a>
-                    <ul id="sublist{{topic.id}}">
-                      {% for content in topic.contents.all %}
-                        <li><a href="#">{{content.name}}</a></li>
-                      {% endfor %}
-                  </ul>
+        <div id="sidebar-wrapper">
+            <ol class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        English
+                    </a>
                 </li>
-            {% endfor %}
-          </ul>
-            <li>
-                <a href="#">Overview</a>
+                <li>
+                    <a href="/">Home</a>
+
+                </li>
+                <li>
+
+                    <a data-toggle="collapse" data-target=".sublist" >{{chapter.name}} - Chapter {{chapter.position}}</a>
+                    <ul class="sublist">
+                    {% for topic in chapter.topics.all %}
+                    <li>
+                        <a data-toggle="collapse" data-target="#sublist{{topic.id}}" >{{ topic.name }}</a>
+                        <ul id="sublist{{topic.id}}">
+                          {% for content in topic.contents.all %}
+                            <li><a href="#">{{content.name}}</a></li>
+                          {% endfor %}
+                      </ul>
+                    </li>
+                {% endfor %}
+              </ul>
             </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-        </ol>
-    </div>
+            </ol>
+        </div>
+        <div class="container" id ="pagecontainer" >
+          <div class="col-xs-12" style="text-center:True;">
+            <h3>
+              {{page.title}}
+            </h3>
+          </div>
+        </div>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -68,5 +62,5 @@
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>
-</div>
+
 </html>

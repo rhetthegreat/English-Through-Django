@@ -1,5 +1,8 @@
-.active i.icon-folder-open{ display:inline-block; }
-.active i.icon-folder-close { display:none;}
 
-.inactive i.icon-folder-close{ display:inline-block; }
-.inactive i.icon-folder-open { display:none;}
+@media screen and (min-width:768px)
+{
+#pagecontainer{
+  margin-left: 300px;
+  border: 5px solid red;
+}
+}
