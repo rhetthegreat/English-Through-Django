@@ -1,8 +1,9 @@
-
+#pageheader{
+  text-align: center;
+}
 @media screen and (min-width:768px)
 {
 #pagecontainer{
   margin-left: 300px;
-  border: 5px solid red;
 }
 }

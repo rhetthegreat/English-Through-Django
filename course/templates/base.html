@@ -37,7 +37,7 @@
                         <a data-toggle="collapse" data-target="#sublist{{topic.id}}" >{{ topic.name }}</a>
                         <ul id="sublist{{topic.id}}">
                           {% for content in topic.contents.all %}
-                            <li><a href="#">{{content.name}}</a></li>
+                            <li><a href="#{{content.id}}content">{{content.name}}</a></li>
                           {% endfor %}
                       </ul>
                     </li>
@@ -46,11 +46,30 @@
             </li>
             </ol>
         </div>
-        <div class="container" id ="pagecontainer" >
-          <div class="col-xs-12" style="text-center:True;">
+        <div class="container-fluid" id ="pagecontainer" >
+          <div class="row" id="pageheader">
+            <div class="col-xs-12">
+              <h1>
+                {{page.title}}
+              </h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
             <h3>
-              {{page.title}}
+              {{topic.header}}
             </h3>
+            <br><br>
+            {% for content in topic.contents.all %}
+
+              <h2 id = "{{content.id}}content">
+                {{content.name}}
+              </h2>
+              <p>
+                {{content.body}}
+              </p>
+            {% endfor %}
+          </div>
           </div>
         </div>
 
