@@ -10,22 +10,38 @@
   //    if (width>=768) {
   //      $('.contentText').addClass('col-xs-offset-3');
   //    }}).resize();//trigger the resize event on page load.
+  $("audio").bind("stalled", function() {
+        var audio = this;
+        audio.load();
+
+        // Threw in these two lines for good measure.
+        audio.play();
+        audio.pause();
+    });
   var onPlayStarted=function(ele)
   {
     console.log(ele.duration);
     var text = ele.parentElement.innerHTML;
     text = text.split("<")[0];
     var words = text.split(" ");
-    console.log(text);
+    for(var i = 0; i<words.length;i++)
+    {
+      if(words[i]=="")
+      {
+        words.splice(i,1)
+      }
+    }
+    console.log(words)
+    var running = true;
     var update = function()
     {
       console.log(!(ele.paused||ele.ended));
-      if(!(ele.paused||ele.ended))
+      if(!(ele.paused||ele.ended)&&running)
       {
         setTimeout(update,100);
       }
     }
-    update()
+
   }
   </script>
   {% endblock %}
@@ -38,7 +54,7 @@
   </div>
 </div>
 <div class="row  text-center" >
-  <div class="col-xs-8 col-xs-offset-2 "  >
+  <div class="col-xs-8 col-xs-offset-2"  >
     <h3>
       {{topic.header}}
     </h3>
@@ -55,8 +71,9 @@
           </h1>
           <p>
             {{content.body}}
-          <audio controls onplay="onPlayStarted(this);">
-            <source src="{{content.reading.url}}" type="audio/mpeg">
+            <br>
+          <audio preload controls onplay="onPlayStarted(this);">
+            <source src="{{content.reading.url}}" type="audio/mp4">
             </audio>
           </p>
         </div>
