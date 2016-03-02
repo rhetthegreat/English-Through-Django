@@ -20,27 +20,45 @@
     });
   var onPlayStarted=function(ele)
   {
-    console.log(ele.duration);
-    var text = ele.parentElement.innerHTML;
-    text = text.split("<")[0];
+    var content = $(ele).prev().get(0);
+    var text = content.innerHTML;
     var words = text.split(" ");
     for(var i = 0; i<words.length;i++)
     {
       if(words[i]=="")
       {
         words.splice(i,1)
+        i--;
       }
     }
-    console.log(words)
+    words.splice(0,1)
+    console.log(words);
     var running = true;
+
     var update = function()
     {
-      console.log(!(ele.paused||ele.ended));
-      if(!(ele.paused||ele.ended)&&running)
+
+      var index = (ele.currentTime/ele.duration-0.05)*words.length;
+      index = Math.round(index);
+      var fulltext="";
+      for(var i =0; i< words.length; i++)
       {
-        setTimeout(update,100);
+        if(i==index)
+        {
+          fulltext=fulltext+'<span class="highlight">'+words[i]+"</span> ";
+        }else {
+        fulltext=fulltext+words[i]+" ";
+      }
+      }
+      console.log(fulltext);
+       content.innerHTML=fulltext;
+      if(!(ele.paused||ele.ended))
+      {
+        setTimeout(update,50);
       }
     }
+    setTimeout(function(){update=null},ele.duration*1000+100);
+   update();
 
   }
   </script>
@@ -69,13 +87,10 @@
           <h1 id="{{content.id}}content">
             {{content.name}}
           </h1>
-          <p>
+          <p class="contentbody">
             {{content.body}}
-            <br>
-          <audio preload controls onplay="onPlayStarted(this);">
-            <source src="{{content.reading.url}}" type="audio/mp4">
-            </audio>
           </p>
+            <audio controls src="{{content.reading.url}}" onplay="onPlayStarted(this);"></audio>
         </div>
         {% if page.imageWidth > 0 %}
         <div class="col-xs-{{ page.imageWidth }}">
