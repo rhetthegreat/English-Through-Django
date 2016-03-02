@@ -1,0 +1,20 @@
+.contentHolder{
+  padding-top: 30px;
+  padding-bottom: 20px;
+  /*padding-left: 80px;*/
+}
+#pageheader{
+  text-align: center;
+}
+
+.borderbox{
+  border: 5px solid red;
+}
+.imageholder{
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.highlight{
+  background-color: #FFFF22;
+
+}

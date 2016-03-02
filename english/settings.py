@@ -121,5 +121,6 @@ USE_TZ = True
 STATICFILES_DIRS = [
     '/Users/sankarmanoj/project/english/static',
 ]
-
+MEDIA_ROOT="/Users/sankarmanoj/project/english/media"
+MEDIA_URL="/media/"
 STATIC_URL = '/static/'
